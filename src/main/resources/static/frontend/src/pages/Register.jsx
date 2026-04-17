@@ -31,7 +31,7 @@ const Register = () => {
         subject: 'Your Verification Code',
         message: `Hi ${form.username}, your OTP is ${newOtp}`
       });
-      
+      console.log(`your OTP is ${newOtp}`);
       setGeneratedOtp(newOtp);
       setIsOtpSent(true);
     } catch (err) {
