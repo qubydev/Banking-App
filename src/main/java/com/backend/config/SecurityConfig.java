@@ -37,7 +37,7 @@ public class SecurityConfig {
          // Inside your filterChain method...
             .authorizeHttpRequests(auth -> auth
                 // Added "/error" so you can actually see what is going wrong
-                .requestMatchers("/", "/error", "/api/auth/register", "/api/auth/login", "/api/accounts/**", "/api/auth/send").permitAll()
+                .requestMatchers("/", "/error", "/api/auth/register", "/api/auth/login", "/api/accounts/**","/api/accounts", "/api/auth/send").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
