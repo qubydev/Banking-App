@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
         Account account = new Account();
         account.setAccountNumber("ACC" + (1000 + userRepository.count()));
         account.setCisfNumber( (long)(Math.floor(100000 + Math.random() * 900000)));
-        account.setBalance(new BigDecimal("00"));
+        account.setBalance(new BigDecimal("1000"));
         account.setAccountType("SAVINGS");
         account.setUser(user);
         accountRepository.save(account);
