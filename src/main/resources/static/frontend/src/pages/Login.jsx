@@ -1,34 +1,34 @@
 import React from 'react'
 import { useState } from 'react';
 import api from '../api/axiosInstance';
-import {useAuth} from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext'
 import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
-  const[form,setForm]=useState({username:'',password:''});
-  const[loading,setLoading]=useState(false);
-  const[error,setError]=useState('');
-  const{login}=useAuth();
-  const navigate=useNavigate();
-  const handleChange=(e)=>{
-    setForm({...form,[e.target.name]:e.target.value});
+  const [form, setForm] = useState({ username: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit=async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     try {
-      const res=await api.post('/api/auth/login',form);
-      login({username:res.data.username},res.data.token);
+      const res = await api.post('/api/auth/login', form);
+      login({ username: res.data.username }, res.data.token);
       navigate('/dashboard');
     } catch (error) {
       setError(err.response?.data?.error || 'Login failed');
     }
   }
- return (
+  return (
     /* h-screen + overflow-hidden prevents the vertical scroll bar */
     <div className="flex items-center justify-center  h-[calc(100vh-4.57rem)] w-full bg-slate-50 px-4 overflow-hidden">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100">
-        
+
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">
             Welcome back
@@ -73,16 +73,16 @@ const Login = () => {
           <button
             type="submit"
             className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 transform active:scale-[0.98] shadow-lg shadow-indigo-200"
-           disabled={loading}
+            disabled={loading}
           >
-           {loading?'Logging in':'Login'}
+            {loading ? 'Logging in' : 'Login'}
           </button>
         </form>
 
         <p className="text-center text-sm text-slate-600">
           Don't have an account?{' '}
-          <Link 
-            to="/register" 
+          <Link
+            to="/register"
             className="font-semibold text-indigo-600 hover:underline decoration-2 underline-offset-4"
           >
             Create one
